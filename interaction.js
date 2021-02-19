@@ -15,7 +15,7 @@ function DnD(canvas, interactor) {
     this.xFinal = this.x = pos.x
     this.yFinal = this.y = pos.y
     this.isDragged = true
-    interactor.onInteractionStart.bind(interactor)(this)
+    interactor.onInteractionStart(this)
     //console.log(`x = ${xFinal}, y = ${yFinal}`)
   }
 
@@ -26,7 +26,7 @@ function DnD(canvas, interactor) {
       const pos = getMousePosition(canvas, evt)
       this.xFinal = pos.x
       this.yFinal = pos.y
-      interactor.onInteractionUpdate.bind(interactor)(this)
+      interactor.onInteractionUpdate(this)
       //console.log(`x = ${xFinal}, y = ${yFinal}`)
     }
   }
@@ -37,14 +37,14 @@ function DnD(canvas, interactor) {
       this.xFinal = pos.x
       this.yFinal = pos.y
       this.isDragged = false
-      interactor.onInteractionEnd.bind(interactor)(this)
+      interactor.onInteractionEnd(this)
       //console.log(`x = ${xFinal}, y = ${yFinal}`)
     }
   }
 
-  canvas.addEventListener('mousedown', this.onMouseDown.bind(this))
-  canvas.addEventListener('mousemove', this.onMouseMove.bind(this))
-  canvas.addEventListener('mouseup', this.onMouseUp.bind(this))
+  canvas.addEventListener('mousedown', this.onMouseDown)
+  canvas.addEventListener('mousemove', this.onMouseMove)
+  canvas.addEventListener('mouseup', this.onMouseUp)
 	// Associer les fonctions précédentes aux évènements du canvas.
 }
 
