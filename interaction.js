@@ -16,7 +16,6 @@ function DnD(canvas, interactor) {
     this.yFinal = this.y = pos.y
     this.isDragged = true
     interactor.onInteractionStart(this)
-    //console.log(`x = ${xFinal}, y = ${yFinal}`)
   }
 
   DnD.prototype.onMouseMove = function(evt) {
@@ -27,7 +26,6 @@ function DnD(canvas, interactor) {
       this.xFinal = pos.x
       this.yFinal = pos.y
       interactor.onInteractionUpdate(this)
-      //console.log(`x = ${xFinal}, y = ${yFinal}`)
     }
   }
 
@@ -38,7 +36,6 @@ function DnD(canvas, interactor) {
       this.yFinal = pos.y
       this.isDragged = false
       interactor.onInteractionEnd(this)
-      //console.log(`x = ${xFinal}, y = ${yFinal}`)
     }
   }
 

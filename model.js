@@ -11,7 +11,6 @@ function Shape(startX, startY, thickness, color) {
 
 function Rectangle(startX, startY, thickness, color, height, width) {
     Shape.call(this, startX, startY, thickness, color)
-    console.log(this)
     this.height = height
     this.width = width
 }

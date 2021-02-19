@@ -21,7 +21,6 @@ function Pencil(ctx, drawing, canvas) {
 	// Implémentez ici les 3 fonctions onInteractionStart, onInteractionUpdate et onInteractionEnd
 
 	Pencil.prototype.onInteractionStart = function(dragNDrop) {
-		//console.log("start")
 		if(this.currEditingMode === editingMode.rect)
 			this.currentShape = new Rectangle(dragNDrop.xFinal, dragNDrop.yFinal, this.currLineWidth, this.currColour, 0, 0)
 	    else if(this.currEditingMode === editingMode.line)
@@ -31,7 +30,6 @@ function Pencil(ctx, drawing, canvas) {
 	}
 
 	Pencil.prototype.onInteractionUpdate = function(dragNDrop) {
-		//console.log("continue")
 		if(this.currEditingMode === editingMode.rect) {
 			this.currentShape.width = dragNDrop.xFinal - this.currentShape.startX
 			this.currentShape.height = dragNDrop.yFinal - this.currentShape.startY
@@ -44,22 +42,21 @@ function Pencil(ctx, drawing, canvas) {
 	}
 
 	Pencil.prototype.onInteractionEnd = function(_) {
-		//console.log("up")
 		drawing.shapeArray.set(this.id, this.currentShape)
 		drawing.paint.bind(drawing)(ctx, canvas)
-		updateShapeList(document, drawing)
-		console.log("remove" + this.id)
-		document.getElementById("remove" + this.id).onclick = (_) => console.log("foo")
+		updateShapeList(this.id, this.currentShape)
+		document.getElementById("remove" + this.id).onclick =
+			(event) => remove(drawing, event.currentTarget.id.substring(6), ctx, canvas)
 		this.id++
 		this.currentShape = 0
 	}
 }
 
-function remove(drawing, index) {
-	console.log(index)
-	drawing.shapeArray.delete(index)
-	updateShapeList(document, drawing)
-	drawing.paint()
+function remove(drawing, index, ctx, canvas) {
+	drawing.shapeArray.delete(parseInt(index))
+	document.getElementById('remove' + index).remove()
+	document.getElementById('liRemove' + index).remove()
+	drawing.paint(ctx, canvas)
 }
 
 
