@@ -7,6 +7,8 @@ function Pencil(ctx, drawing, canvas) {
 	this.currColour = '#000000';
 	this.currentShape = 0;
 
+	this.id = 0
+
 	// Liez ici les widgets à la classe pour modifier les attributs présents ci-dessus.
 	document.getElementById('butRect').onclick = (_) => this.currEditingMode = editingMode.rect
 	document.getElementById('butLine').onclick = (_) => this.currEditingMode = editingMode.line
@@ -43,10 +45,21 @@ function Pencil(ctx, drawing, canvas) {
 
 	Pencil.prototype.onInteractionEnd = function(_) {
 		//console.log("up")
-		drawing.shapeArray.push(this.currentShape)
+		drawing.shapeArray.set(this.id, this.currentShape)
 		drawing.paint.bind(drawing)(ctx, canvas)
+		updateShapeList(document, drawing)
+		console.log("remove" + this.id)
+		document.getElementById("remove" + this.id).onclick = (_) => console.log("foo")
+		this.id++
 		this.currentShape = 0
 	}
+}
+
+function remove(drawing, index) {
+	console.log(index)
+	drawing.shapeArray.delete(index)
+	updateShapeList(document, drawing)
+	drawing.paint()
 }
 
 
