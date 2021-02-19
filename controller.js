@@ -54,7 +54,6 @@ function Pencil(ctx, drawing, canvas) {
 
 function remove(drawing, index, ctx, canvas) {
 	drawing.shapeArray.delete(parseInt(index))
-	document.getElementById('remove' + index).remove()
 	document.getElementById('liRemove' + index).remove()
 	drawing.paint(ctx, canvas)
 }
