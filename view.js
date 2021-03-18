@@ -13,6 +13,14 @@ Line.prototype.paint = function (ctx) {
     ctx.stroke();
 };
 
+Circle.prototype.paint = function(ctx) {
+    ctx.strokeStyle = this.color
+    ctx.lineWidth = this.thickness
+    ctx.beginPath()
+    ctx.ellipse(this.startX, this.startY, this.radius, this.radius, 0, 0, 2 * Math.PI, false)
+    ctx.stroke()
+}
+
 Drawing.prototype.paint = function (ctx, canvas) {
     ctx.fillStyle = '#F0F0F0'; // set canvas' background color
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -31,6 +39,8 @@ function toDom(shape, index) {
             innerHtml += '<span style="color:' + shape.color + '">□</span> Rectangle'
         else if(shape.constructor === Line)
             innerHtml += '<span style="color:' + shape.color + '">/</span> Line'
+        else if(shape.constructor === Circle)
+            innerHtml += '<span style="color:' + shape.color + '">◯</span> Circle'
 
         innerHtml += `
                 <button type="button" class="btn btn-default remove" id="remove${index}">

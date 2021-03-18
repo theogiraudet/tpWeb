@@ -20,5 +20,10 @@ function Line(startX, startY, thickness, color, endX, endY) {
     this.endX = endX
     this.endY = endY
 }
+
+function Circle(startX, startY, thickness, color, radius) {
+    Shape.call(this, startX, startY, thickness, color)
+    this.radius = radius
+}
 // Implémenter ici les 4 classes du modèle.
 // N'oubliez pas l'héritage !
